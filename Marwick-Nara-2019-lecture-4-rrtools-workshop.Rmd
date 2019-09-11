@@ -1,0 +1,323 @@
+---
+title: "Writing reproducible research with R and Markdown"
+author: "Ben Marwick"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: "my-theme.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+class: normal
+
+# Previously...
+
+Marwick, B., & Birch, S. (2018) A Standard for the Scholarly Citation of Archaeological Data as an Incentive to Data Sharing. _Advances in Archaeological Practice_ 1-19. https://doi.org/10.1017/aap.2018.3 
+
+Marwick, B, & 47 others (2017) Open science in archaeology. _SAA Archaeological Record_, 17(4), pp. 8-14. 
+
+Marwick, B. (2017). Computational reproducibility in archaeological research: Basic principles and a case study of their implementation. _Journal of Archaeological Method and Theory_, 24(2), 424-450. preprint at https://osf.io/preprints/socarxiv/q4v73/
+
+Marwick, B., Boettiger, C., & Mullen, L. (2017). Packaging data analytical work reproducibly using R (and friends). _The American Statistician_ 70 (1) : 80-88  https://doi.org/10.1080/00031305.2017.1375986
+
+Eglen, S. J., Marwick, B., Halchenko, Y. O., et al. (2017). Toward standard practices for sharing computer code and programs in neuroscience. _Nature Neuroscience_, 20(6), 770-773. preprint at https://www.biorxiv.org/content/early/2017/02/28/045104
+
+Kitzes, J., Turek, D., & Deniz, F. (Eds.). (2017). _The Practice of Reproducible Research: Case Studies and Lessons from the Data-Intensive Sciences_. Oakland, CA: University of California Press. Full text online at https://www.practicereproducibleresearch.org (contributed to a few chapters)
+
+---
+class: normal
+
+# And outside of the ivory tower...
+
+Marwick, B., & Jacobs, Z. (2017). Here's the three-pronged approach we're using in our own research to tackle the reproducibility issue. _The Conversation._  https://theconversation.com/heres-the-three-pronged-approach-were-using-in-our-own-research-to-tackle-the-reproducibility-issue-80997
+
+Marwick, B. (2015). How Computers Broke Science–and What We Can Do to Fix It. _The Conversation._ https://theconversation.com/how-computers-broke-science-and-what-we-can-do-to-fix-it-49938 translated into French, German, Japanese & Chinese
+
+---
+
+background-image: url(https://mfr.osf.io/export?url=https://osf.io/9bru3/?action=download%26direct%26mode=render&initialWidth=723&childId=mfrIframe&format=1200x1200.jpeg)
+
+
+---
+
+background-image: url(https://media.giphy.com/media/d3QGYTziFiDL2/giphy.gif)
+
+---
+class: normal
+
+# How to make this as quick & easy as possible?
+
+.large[<i class="fa fa-lightbulb-o"></i> Use functions instead of copy-pasting]   
+
+.large[<i class="fa fa-lightbulb-o"></i> Use sensible templates & default options] 
+
+.large[<i class="fa fa-lightbulb-o"></i> Hide details we don't care much about]
+
+---
+class: normal
+
+# A solution: the rrtools package
+
+.large[The aim is to provide instructions, templates, and functions for making a basic compendium suitable for doing reproducible research with R]
+
+---
+class: normal
+
+# From zero to reproducible in 5+ steps (minutes)
+
+Ensure you have the current versions of R & RStudio, the development tools (Xcode or Rtools), open RStudio, set your working directory to your desktop, and then:
+
+Install from GitHub (eventually CRAN too):
+
+```{r eval=FALSE, tidy=FALSE}
+# install.packages("devtools")
+devtools::install_github("benmarwick/rrtools")
+```
+
+---
+class: normal
+
+# 1. Create a basic R package
+
+This is `devtools::create()` with an additional step to either start the project in RStudio, or set the working directory to the package location, if not using RStudio: 
+
+```{r eval=FALSE, tidy=FALSE}
+rrtools::use_compendium("myprojname") # use a meaningful name :)
+```
+
+Why? Using a widely recognised file structure makes it easier for you to navigate, and easier for others to browse and inspect your work.
+
+---
+class: normal
+
+# 2. Add a license for our code
+
+This adds a reference to the MIT license in the DESCRIPTION file and generates a LICENSE file listing the name provided as the copyright holder:
+
+```{r eval=FALSE, tidy=FALSE}
+usethis::use_mit_license(name = "My Name")
+```
+
+To use a different license, replace this line with `usethis::use_gpl3_license(name = "My Name")`, or follow the instructions for other licenses
+
+Why? To make it clear that you're happy for others to use your code, and that you're not responsible if they have problems. 
+
+---
+class: normal
+
+# 3a. Use version control for tracking changes and collaboration
+
+Assumning we have Git installed, we go to the R console and introduce ourselves to Git:
+
+```{r eval = FALSE}
+usethis::use_git_config(user.name = "Ben Marwick", 
+               user.email = "benmarwick@hotmail.com")
+# check it
+usethis::git_sitrep()
+```
+
+And let's make sure we have an account at <https://github.com> to back-up our compendium and collaborate with our colleagues
+
+---
+
+class: normal
+
+# 3b. Use version control for tracking changes and collaboration
+
+This initializes a local git repository so we can use version control with our project:
+
+```{r eval=FALSE, tidy=FALSE}
+usethis::use_git()
+```
+
+Why? To increase the transparency, efficiency and accessibility of your work. 
+---
+class: normal
+
+# 3c. Use version control for tracking changes and collaboration
+
+Now we are going to get a secret code to control GitHub from our RStudio
+
+```{r eval=FALSE, tidy=FALSE}
+# open up the GitHub panel to generate 
+# your Personal Authorisation Token (PAT) 
+usethis::browse_github_pat() 
+# get a token from https://github.com/settings/tokens
+usethis::edit_r_environ() 
+# Paste your copied PAT into your .Renviron file as system variable: 
+# GITHUB_PAT=XXXXXX
+# check it
+usethis::git_sitrep()
+```
+
+Why? To increase the transparency, efficiency and accessibility of your work. 
+---
+
+class: normal
+
+# 3d. Use version control for tracking changes and collaboration
+
+Now we are going to create a repository for our project on the GitHub website:
+
+```{r eval=FALSE, tidy=FALSE}
+# make a GitHub repository for our compendium
+usethis::use_github(protocol = "https", 
+                    private = FALSE)
+```
+
+You can also create a private repository. GitHub is what most people are using, but there other good options, such as GitLab
+
+Why? To increase the transparency, efficiency and accessibility of your work. 
+
+---
+
+class: normal
+
+# 4. Add instructions for other users and readers
+
+This generates README.Rmd and renders it to README.md, ready to display on GitHub. It contains:
+- a template citation to show others how to cite your project.   
+- license information for the text, figures, code and data in your compendium   
+- this also adds two other markdown files: a code of conduct for users, and basic instructions for people who want to contribute to your project
+
+```{r eval=FALSE, tidy=FALSE}
+rrtools::use_readme_rmd()
+```
+
+Why? To improve the accessibility of your work by communicating with to others the purpose of your work, how you want it cited. To manage expectations for how others can interact with it.
+
+---
+class: normal
+
+# 5. Add compendium file structure and document templates
+
+This creates a research compendium file structure and add template documents such as:
+
+- an R Markdown file for writing a journal article
+- a bib file for holding bibliographic citations
+- a citation style file
+- a template for styling MS Word output
+
+```{r eval=FALSE, tidy=FALSE}
+rrtools::use_analysis()
+```
+
+Why? To write code and text in a reproducible document. To keep your work organised so you can be more efficient, and your project is easier for others to browse. 
+
+---
+class: normal
+
+.large[
+```
+analysis/
+|
+├── paper/
+│   ├── paper.Rmd         # this is the main document to edit
+│   ├── references.bib    # this contains the reference list information
+│   └── journal-of-archaeological-science.csl
+|                         # this sets the style of citations 
+|                         # & reference list
+├── figures/
+|
+├── data/
+│   ├── raw_data/       # data obtained from elsewhere
+│   └── derived_data/   # data generated during the analysis
+|
+└──  templates
+    ├── template.docx  # used to style the output of the paper.Rmd
+    └── template.Rmd
+```
+]
+
+You can exclude `data/` from git, if you need to keep the data private.
+
+If you're writing a PhD thesis, use [huskydown](https://github.com/benmarwick/huskydown) to get PDF templates and a directory structure suitable for a UW PhD
+
+---
+class: normal
+
+# Let's take R Markdown for a test drive
+
+.large[<i class="fa fa-wrench"></i> Code chunks & in-line code]   
+
+.large[<i class="fa fa-wrench"></i> Citations, captions & cross-references] 
+
+.large[<i class="fa fa-wrench"></i> Figures, plots & tables]
+
+---
+
+background-image: url(https://media.giphy.com/media/aO2xSELarYXfy/giphy.gif)
+
+---
+class: normal
+
+# The compendium plus!
+
+```{r eval=FALSE, tidy=FALSE}
+rrtools::use_dockerfile()
+rrtools::use_travis()
+usethis::use_testthat()
+```
+
+Why? To avoid dependency complications and streamline trouble-shooting
+
+---
+class: normal
+
+# What we have not done
+
+We have not attempted to automate depositing the compendium in a repository. 
+
+```{r eval=FALSE, tidy=FALSE}
+# e.g. something like
+rrtools::deposit_compendium()
+```
+
+Why? Because it's not clear to us what the most sensible options are for most people. There are many trustworthy repositories you could use. You may not want to share some or all of your data or intermediate products. 
+
+So we leave this up to you, and encourage you to make available as much as possible.
+
+---
+class: normal
+
+# To conclude
+
+.large[<i class="fa fa-check-square-o"></i> We have many encoded best practices in getting organised]   
+
+.large[<i class="fa fa-clock-o"></i> We have saved a lot of start-up time] 
+
+.large[<i class="fa fa-recycle"></i> We have a sustainable path to working reproducibly]
+
+---
+class: normal
+
+# Colophon
+
+.larger[
+Presentation written in [R Markdown using xaringan](https://github.com/yihui/xaringan)
+
+Compiled into HTML5 using [RStudio](http://www.rstudio.com/ide/) & [knitr](http://yihui.name/knitr)
+
+Source code hosting:
+https://github.com/benmarwick/
+
+ORCID: http://orcid.org/0000-0001-7879-4531
+
+Licensing: 
+
+* Presentation: [CC-BY-3.0](http://creativecommons.org/licenses/by/3.0/us/)
+
+* Source code: [MIT](http://opensource.org/licenses/MIT) ]
+
+
+
+

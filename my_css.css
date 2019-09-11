@@ -1,0 +1,209 @@
+/* unvisited link */
+a:link {
+    color: yellow;
+    border-bottom: 1px solid yellow;
+}
+
+/* visited link */
+a:visited {
+    color: yellow;
+        border-bottom: 1px solid yellow;
+}
+
+
+/* mouse over link */
+a:hover {
+    color: yellow;
+    border-bottom: 1px solid yellow;
+}
+
+
+slides > slide.title-slide hgroup h1 {
+  font-weight: lighter;
+  font-size: 55pt;
+  color: yellow;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+slides > slide.title-slide hgroup h2 {
+  font-weight: lighter;
+  font-size: 20pt;
+  color: yellow;
+
+}
+
+.title-slide hgroup p {
+  font-size: 20px;
+  color: yellow;
+  line-height: 1.3;
+  margin-top: 2em;
+}
+
+slides > slide.backdrop {
+  background: black;
+}
+
+
+slides > slide {
+  color: yellow;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+/* line 280, ../scss/default.scss */
+h2 {
+  font-size: 45px;
+  line-height: 65px;
+  letter-spacing: -2px;
+  color: yellow;
+}
+
+/* line 287, ../scss/default.scss */
+h3 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  line-height: 2;
+  font-weight: inherit;
+  color: yellow;
+}
+
+#myImagePage img {
+  width: 600px;
+  height: 600px;
+}
+
+#myImagePage1 img {
+  width: 800px;
+  height: 500px;
+}
+
+#myImagePage2 img {
+  width: 500px;
+  height: 500px;
+}
+
+#myImagePage3 img {
+  width: 500px;
+  height: 700px;
+}
+
+#myImagePage4 img {
+  width: 500px;
+  height: 600px;
+}
+
+#myImagePage5 img {
+  width: 800px;
+  height: 400px;
+}
+
+#myImagePage6 img {
+  width: 500px;
+  height: 1000px;
+}
+
+#myImagePage7 img {
+  width: 400px;
+  height: 500px;
+}
+
+#myImagePage8 img {
+  width: 800px;
+  height: 300px;
+}
+
+#myImagePage9 img {
+  width: 700px;
+  height: 500px;
+}
+
+#myImagePage500x600 img {
+  width: 500px;
+  height: 600px;
+}
+
+#myImagePage600x500 img {
+  width: 600px;
+  height: 500px;
+}
+
+#myImagePage650x500 img {
+  width: 650px;
+  height: 500px;
+}
+
+#myImagePage1000x500 img {
+  width: 1000px;
+  height: 500px;
+}
+
+#myImagePage500x500 img {
+  width: 500px;
+  height: 500px;
+}
+
+#myImagePage800x400 img {
+  width: 800px;
+  height: 400px;
+}
+
+
+
+.mySegue {
+  font-size: 125px;
+  line-height: 130px;
+  letter-spacing: -1px;
+  color: yellow;
+  padding: 60px 120px;
+}
+
+.mySegueSmall {
+  font-size: 75px;
+  line-height: 80px;
+  letter-spacing: -1px;
+  color: yellow;
+  padding: 60px 120px;
+}
+
+.bigger55 {
+   font-size: 55px;
+}
+
+.bigger50 {
+   font-size: 50px;
+}
+
+
+.bigger45 {
+   font-size: 45px;
+}
+
+.bigger40 {
+   font-size: 40px;
+}
+
+.bigger35 {
+   font-size: 35px;
+}
+
+.bigger33 {
+   font-size: 33px;
+}
+
+.bigger30 {
+   font-size: 30px;
+}
+
+.bigger30 {
+   font-size: 30px;
+}
+
+
+
+
+
