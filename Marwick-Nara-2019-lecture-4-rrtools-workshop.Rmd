@@ -74,13 +74,10 @@ class: normal
 
 # From zero to reproducible in 5+ steps (minutes)
 
-Ensure you have the current versions of R & RStudio, the development tools (Xcode or Rtools), open RStudio, set your working directory to your desktop, and then:
-
-Install from GitHub (eventually CRAN too):
+We will use RStudio in the cloud to ensure that we all have the same system with the same packages available:
 
 ```{r eval=FALSE, tidy=FALSE}
-# install.packages("devtools")
-devtools::install_github("benmarwick/rrtools")
+https://rstudio.cloud/project/493309
 ```
 
 ---
@@ -249,9 +246,9 @@ class: normal
 
 .large[<i class="fa fa-wrench"></i> Code chunks & in-line code]   
 
-.large[<i class="fa fa-wrench"></i> Citations, captions & cross-references] 
+.large[<i class="fa fa-wrench"></i> Figures, tables, captions & cross-references] 
 
-.large[<i class="fa fa-wrench"></i> Figures, plots & tables]
+.large[<i class="fa fa-wrench"></i> External figures, Citations]
 
 ---
 
